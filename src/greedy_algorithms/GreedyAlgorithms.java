@@ -1,22 +1,33 @@
 package greedy_algorithms;
 
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.stream.Stream;
+
 public class GreedyAlgorithms {
     public static void main(String[] args) {
-        int[] digits = {3, 1, 7, 9, 19, 25};
-        System.out.println(maxNumberFromDigits(digits));
-        System.out.println(5*Math.log(5));
+//        int[] digits = {3, 1, 7, 9, 9, 5};
+//        System.out.println(maxNumberFromDigits(digits));
 
+        int[] stations = {0, 200, 375, 550, 750, 950};
+        System.out.println(minStops(stations, 400));
     }
 
-    public static String maxNumberFromDigits(int[] digits){
-        int max = -999999999;
+//    public static String maxNumberFromDigits(int[] digits){
+//        return Arrays.stream(digits).boxed().sorted(Comparator.reverseOrder()).map(String::valueOf).reduce("", (a,b) -> a+b);
+//    }
 
-        for(int i=0; i<digits.length; i++){
-            if(max < digits[i]){
-                max = digits[i];
+    public static int minStops(int[] stations, int capacity){
+        int result = 0; //Оптимальное количество остановок
+        int currentStop = 0;
+
+        while(currentStop < stations.length){
+            int nextStop = currentStop;
+
+            while(nextStop < stations.length &&
+            stations[nextStop + 1] - stations[currentStop] <= capacity){
+
             }
         }
-
-        return String.valueOf(max);
     }
 }
