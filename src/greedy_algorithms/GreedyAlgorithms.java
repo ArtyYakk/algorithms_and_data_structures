@@ -17,17 +17,27 @@ public class GreedyAlgorithms {
 //        return Arrays.stream(digits).boxed().sorted(Comparator.reverseOrder()).map(String::valueOf).reduce("", (a,b) -> a+b);
 //    }
 
+    //returns -1 if it's impossible to get from A to B
     public static int minStops(int[] stations, int capacity){
         int result = 0; //Оптимальное количество остановок
         int currentStop = 0;
 
-        while(currentStop < stations.length){
+        while(currentStop < stations.length - 1){
+
             int nextStop = currentStop;
 
-            while(nextStop < stations.length &&
+            while(nextStop < stations.length - 1 &&
             stations[nextStop + 1] - stations[currentStop] <= capacity){
-
+                nextStop++;
             }
+
+            if(currentStop == nextStop) return -1;
+
+            if(nextStop < stations.length - 1) result++;
+
+            currentStop = nextStop;
         }
+
+        return result;
     }
 }
