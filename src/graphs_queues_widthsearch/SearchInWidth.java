@@ -33,14 +33,35 @@ public class SearchInWidth {
 
         map.put(new Person("jonny"), new Person[]{}); // Нет друзей
 
-        Deque<Person> searchDeque = new ArrayDeque<>(Arrays.stream(map.get(new Person("you"))).toList());
+        System.out.println(findMangoSeller(map));
 
-
-        while (!searchDeque.isEmpty()){
-            //Person person = se
-        }
     }
 
+    public static boolean findMangoSeller(Map<Person, Person[]> map){
+        Deque<Person> searchDeque = new ArrayDeque<>(Arrays.stream(map.get(new Person("you"))).toList());
+        Set<Person> searched = new HashSet<>();
+
+        while (!searchDeque.isEmpty()){
+            Person person = searchDeque.pop();
+
+            if(!searched.contains(person)){
+                searched.add(person);
+                if(person.isMangoSeller()){
+                    System.out.println(person.getName() + " is a mango seller!");
+                    return true;
+                } else {
+                    searchDeque.addAll(Arrays.stream(map.get(person)).toList());
+                    System.out.println(person.getName() + " is not a mango seller");
+                }
+            } else{
+                System.out.println("A duplicate element has been removed");
+            }
+
+        }
+
+        System.out.println("No one is a mango seller");
+        return false;
+    }
 }
 
 class Person{
@@ -53,6 +74,10 @@ class Person{
 
     public boolean isMangoSeller(){
         return name.endsWith("m");
+    }
+
+    public String getName(){
+        return name;
     }
 
     @Override
