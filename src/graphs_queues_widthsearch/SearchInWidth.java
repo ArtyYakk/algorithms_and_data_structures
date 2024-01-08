@@ -5,6 +5,7 @@ import java.util.*;
 public class SearchInWidth {
     public static void main(String[] args) {
         Map<Person, Person[]> map = new HashMap<>();
+
         map.put(new Person("you"),
                 new Person[]{
                         new Person("alice"),
